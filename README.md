@@ -20,7 +20,7 @@ In this milestone, the following objectives were achieved:
 
 ## Folder Structure
 
-##Milestone 3: Done Will Update Soon
+## Milestone 3: Done Will Update Soon
 
 The project is organized as follows:
 
@@ -34,3 +34,4 @@ The project is organized as follows:
 - `backend/`: Contains the Node.js server.
   - `server.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+## Milestone 3: Done Will Update  Readme Soon
