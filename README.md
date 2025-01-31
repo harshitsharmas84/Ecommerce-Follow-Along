@@ -20,7 +20,6 @@ In this milestone, the following objectives were achieved:
 
 ## Folder Structure
 
-## Milestone 3: Done Will Update Soon
 
 The project is organized as follows:
 
