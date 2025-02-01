@@ -24,10 +24,16 @@ const getUsers = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
+  const { name, email, password } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
   const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
+    name,
+    email,
+    password,
     profileImage: req.file ? req.file.path : null,
   });
 
