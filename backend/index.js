@@ -1,11 +1,12 @@
-// backend/index.js
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
 const errorHandler = require("./middlewares/errorHandler");
 const app = express();
 const port = 5000;
 
+app.use(cors());
 app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/uploads", express.static("uploads"));

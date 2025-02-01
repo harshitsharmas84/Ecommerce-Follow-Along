@@ -60,3 +60,30 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+
+## Milestone 5: Creating Sign-Up Page
+
+In this milestone, the following objectives were achieved:
+
+- **Sign-Up Page:** Created a Sign-Up Page to allow users to register by filling out their details.
+- **Form Validation:** Added basic form validation to ensure users input valid data before submitting the form.
+
+### Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application.
+
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js file.
+  - `models/`: Contains the userModel.js file.
+  - `routes/`: Contains the userRoutes.js file.
+  - `middlewares/`: Contains the errorHandler.js file.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.
