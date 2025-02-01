@@ -32,3 +32,31 @@ The project is organized as follows:
 - `backend/`: Contains the Node.js server.
   - `server.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+
+## Milestone 4: Creating User Model and Controller
+
+In this milestone, the following objectives were achieved:
+
+- **User Model:** Created a User Model to define the structure of user data in the database.
+- **User Controller:** Set up a User Controller to handle user-related operations, including creating and fetching users.
+- **File Uploads with Multer:** Enabled file uploads using Multer to allow users to upload profile images.
+
+### Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application.
+
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js file.
+  - `models/`: Contains the userModel.js file.
+  - `routes/`: Contains the userRoutes.js file.
+  - `middlewares/`: Contains the errorHandler.js file.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.
