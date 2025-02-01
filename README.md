@@ -20,6 +20,7 @@ In this milestone, the following objectives were achieved:
 
 ## Folder Structure
 
+
 The project is organized as follows:
 
 - `frontend/`: Contains the React application.
@@ -60,3 +61,5 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+## Milestone 3: Done Will Update  Readme Soon
+
