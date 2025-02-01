@@ -1,6 +1,7 @@
 const User = require("../models/userModel");
 const multer = require("multer");
 const path = require("path");
+const bcrypt = require("bcrypt");
 
 // Set up Multer for file uploads
 const storage = multer.diskStorage({
@@ -30,14 +31,15 @@ const createUser = async (req, res) => {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  const user = new User({
-    name,
-    email,
-    password,
-    profileImage: req.file ? req.file.path : null,
-  });
-
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({
+      name,
+      email,
+      password: hashedPassword,
+      profileImage: req.file ? req.file.path : null,
+    });
+
     const newUser = await user.save();
     res.status(201).json(newUser);
   } catch (err) {

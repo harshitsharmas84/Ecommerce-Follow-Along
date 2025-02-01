@@ -89,4 +89,31 @@ The project is organized as follows:
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
 
+## Milestone 6: Encrypting Passwords and Storing User Data
+
+In this milestone, the following objectives were achieved:
+
+- **Password Encryption:** Used bcrypt to hash the user's password during signup.
+- **Secure Data Storage:** Stored the hashed password and other user data securely in the database.
+
+### Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application.
+
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js file.
+  - `models/`: Contains the userModel.js file.
+  - `routes/`: Contains the userRoutes.js file.
+  - `middlewares/`: Contains the errorHandler.js file.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.
+
 ## Milestone 3: Done Will Update  Readme Soon
