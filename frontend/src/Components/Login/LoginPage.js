@@ -1,15 +1,40 @@
-// frontend/src/LoginPage.js
 import React, { useState } from "react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Email:", email);
-    console.log("Password:", password);
+    setError("");
+
+    if (!email || !password) {
+      setError("All fields are required");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:6400/api/users/login", {
+        // Updated port to 6400
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Login failed");
+      }
+
+      const data = await response.json();
+      console.log("Login successful:", data);
+    } catch (error) {
+      console.error("Error during login:", error);
+      setError(error.message || "Login failed. Please try again.");
+    }
   };
 
   return (
@@ -19,6 +44,7 @@ const LoginPage = () => {
         className="bg-white p-8 rounded-lg shadow-lg w-96"
       >
         <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
         <div className="mb-4">
           <label
             htmlFor="email"
