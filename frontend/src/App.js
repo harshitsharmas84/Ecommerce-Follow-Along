@@ -5,6 +5,7 @@ import LoginPage from "./Components/Login/LoginPage";
 import UserList from "./Components/UserList/UserList";
 import SignUpPage from "./Components/SignUp/SignUp";
 import HomePage from "./Components/HomePage/HomePage";
+import ProductForm from "./Components/ProductForm";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/users" element={<UserList />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/create-product" element={<ProductForm />} />
         </Routes>
       </div>
     </Router>

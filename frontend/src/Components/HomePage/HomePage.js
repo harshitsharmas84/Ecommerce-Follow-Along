@@ -45,6 +45,12 @@ const HomePage = () => {
           >
             Sign Up
           </Link>
+          <Link
+            to="/create-product"
+            className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
+          >
+            Create Product
+          </Link>
         </div>
       </header>
       <main className="p-6">
