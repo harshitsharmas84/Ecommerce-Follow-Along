@@ -159,3 +159,35 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+
+## 📝 Milestone 9: Creating Product Form
+
+In this milestone, the following objectives were achieved:
+
+- **Product Form:** Created a form to input all the details of a product, including multiple images.
+- **Form Validation:** Added basic form validation to ensure users input valid data before submitting the form.
+
+### 📂 Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application.
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+      - `Login/`: Contains the LoginPage component.
+      - `SignUp/`: Contains the SignUpPage component.
+      - `UserList/`: Contains the UserList component.
+      - `ProductCard.js`: Contains the ProductCard component.
+      - `HomePage.js`: Contains the HomePage component.
+      - `ProductForm.js`: Contains the ProductForm component.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js file.
+  - `models/`: Contains the userModel.js file.
+  - `routes/`: Contains the userRoutes.js file.
+  - `middlewares/`: Contains the errorHandler.js file.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.
