@@ -1,33 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "../ProductCard";
 
-const products = [
-  {
-    id: 1,
-    name: "Product 1",
-    image:
-      "https://cdn.pixabay.com/photo/2023/08/11/10/15/watch-8183268_1280.jpg",
-    price: 29.99,
-  },
-  {
-    id: 2,
-    name: "Product 2",
-    image:
-      "https://cdn.pixabay.com/photo/2023/08/11/10/15/watch-8183268_1280.jpg",
-    price: 39.99,
-  },
-  {
-    id: 3,
-    name: "Product 3",
-    image:
-      "https://cdn.pixabay.com/photo/2023/08/11/10/15/watch-8183268_1280.jpg",
-    price: 49.99,
-  },
-  // Add more products as needed
-];
-
 const HomePage = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:6400/api/products")
+      .then((response) => response.json())
+      .then((data) => setProducts(data))
+      .catch((error) => console.error("Error fetching products", error));
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-white shadow-md p-4 flex justify-between items-center">
@@ -57,9 +41,9 @@ const HomePage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((product) => (
             <ProductCard
-              key={product.id}
+              key={product._id}
               name={product.name}
-              image={product.image}
+              image={`http://localhost:6400/${product.imageUrl[0]}`}
               price={product.price}
             />
           ))}

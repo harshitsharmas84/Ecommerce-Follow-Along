@@ -191,3 +191,35 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+
+## 📝 Milestone 10: Creating Product Schema and Endpoint
+
+In this milestone, the following objectives were achieved:
+
+- **Product Schema:** Created a Mongoose schema to define the structure of product data, including fields for name, description, price, and image URL.
+- **Product Endpoint:** Built a POST endpoint to receive product data, validate it, and save it to MongoDB.
+
+### 📂 Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application.
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+      - `Login/`: Contains the LoginPage component.
+      - `SignUp/`: Contains the SignUpPage component.
+      - `UserList/`: Contains the UserList component.
+      - `ProductCard.js`: Contains the ProductCard component.
+      - `HomePage.js`: Contains the HomePage component.
+      - `ProductForm.js`: Contains the ProductForm component.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js and productController.js files.
+  - `models/`: Contains the userModel.js and productModel.js files.
+  - `routes/`: Contains the userRoutes.js and productRoutes.js files.
+  - `middlewares/`: Contains the errorHandler.js file.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.
