@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const ProductForm = () => {
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
@@ -14,16 +15,17 @@ const ProductForm = () => {
     e.preventDefault();
     setError("");
 
-    if (!name || !price || images.length === 0) {
+    if (!name || !description || !price || images.length === 0) {
       setError("All fields are required");
       return;
     }
 
     const formData = new FormData();
     formData.append("name", name);
+    formData.append("description", description);
     formData.append("price", price);
-    images.forEach((image, index) => {
-      formData.append(`images`, image);
+    images.forEach((image) => {
+      formData.append("imageUrl", image);
     });
 
     try {
@@ -65,6 +67,21 @@ const ProductForm = () => {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Description
+          </label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             required
           />

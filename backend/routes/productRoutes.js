@@ -1,5 +1,8 @@
 const express = require("express");
-const { createProduct } = require("../controllers/productController");
+const {
+  createProduct,
+  getProducts,
+} = require("../controllers/productController");
 const multer = require("multer");
 const path = require("path");
 
@@ -17,6 +20,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post("/", upload.array("images", 10), createProduct);
+router.post("/", upload.array("imageUrl", 10), createProduct);
+router.get("/", getProducts);
 
 module.exports = router;
