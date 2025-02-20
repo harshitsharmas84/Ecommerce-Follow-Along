@@ -23,7 +23,7 @@ const ProductForm = () => {
     formData.append("name", name);
     formData.append("price", price);
     images.forEach((image, index) => {
-      formData.append(`images[${index}]`, image);
+      formData.append(`images`, image);
     });
 
     try {
