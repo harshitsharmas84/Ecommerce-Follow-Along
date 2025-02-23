@@ -2,6 +2,7 @@ const express = require("express");
 const {
   createProduct,
   getProducts,
+  getProductsByEmail,
 } = require("../controllers/productController");
 const multer = require("multer");
 const path = require("path");
@@ -22,5 +23,6 @@ const upload = multer({ storage: storage });
 
 router.post("/", upload.array("imageUrl", 10), createProduct);
 router.get("/", getProducts);
+router.get("/user/:email", getProductsByEmail);
 
 module.exports = router;

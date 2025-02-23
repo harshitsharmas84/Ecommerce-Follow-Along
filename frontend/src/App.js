@@ -6,6 +6,7 @@ import UserList from "./Components/UserList/UserList";
 import SignUpPage from "./Components/SignUp/SignUp";
 import HomePage from "./Components/HomePage/HomePage";
 import ProductForm from "./Components/ProductForm";
+import MyProducts from "./Components/MyProducts";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/create-product" element={<ProductForm />} />
+          <Route path="/my-products" element={<MyProducts />} />
+          <Route path="/user/:email" element={<MyProducts />} />
         </Routes>
       </div>
     </Router>
