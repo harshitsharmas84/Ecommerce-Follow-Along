@@ -256,3 +256,37 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+
+## 📝 Milestone 12: Displaying User's Products
+
+In this milestone, the following objectives were achieved:
+
+- **Product Filtering:** Created an endpoint to fetch products filtered by the user's email.
+- **Frontend Fetch:** Implemented a function in the frontend to fetch products by the user's email.
+- **Dynamic Display:** Displayed the fetched products dynamically using the ProductCard component.
+
+### 📂 Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application.
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+      - `Login/`: Contains the LoginPage component.
+      - `SignUp/`: Contains the SignUpPage component.
+      - `UserList/`: Contains the UserList component.
+      - `ProductCard.js`: Contains the ProductCard component.
+      - `HomePage.js`: Contains the HomePage component.
+      - `ProductForm.js`: Contains the ProductForm component.
+      - `MyProducts.js`: Contains the MyProducts component.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js and productController.js files.
+  - `models/`: Contains the userModel.js and productModel.js files.
+  - `routes/`: Contains the userRoutes.js and productRoutes.js files.
+  - `middlewares/`: Contains the errorHandler.js file.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.

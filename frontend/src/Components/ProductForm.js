@@ -5,6 +5,7 @@ const ProductForm = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [images, setImages] = useState([]);
+  const [email, setEmail] = useState(""); // Add email state
   const [error, setError] = useState("");
 
   const handleImageChange = (e) => {
@@ -15,7 +16,7 @@ const ProductForm = () => {
     e.preventDefault();
     setError("");
 
-    if (!name || !description || !price || images.length === 0) {
+    if (!name || !description || !price || !email || images.length === 0) {
       setError("All fields are required");
       return;
     }
@@ -24,6 +25,7 @@ const ProductForm = () => {
     formData.append("name", name);
     formData.append("description", description);
     formData.append("price", price);
+    formData.append("userEmail", email); // Append email to form data
     images.forEach((image) => {
       formData.append("imageUrl", image);
     });
@@ -98,6 +100,22 @@ const ProductForm = () => {
             id="price"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             required
           />
