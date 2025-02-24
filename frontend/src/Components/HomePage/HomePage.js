@@ -55,7 +55,8 @@ const HomePage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredProducts.map((product) => (
             <ProductCard
-              key={product._id}
+              key={product._id} // Add key prop
+              id={product._id}
               name={product.name}
               image={`http://localhost:6400/${product.imageUrl[0]}`}
               price={product.price}

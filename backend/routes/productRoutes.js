@@ -3,6 +3,8 @@ const {
   createProduct,
   getProducts,
   getProductsByEmail,
+  updateProduct,
+  getProductById, // Import the new function
 } = require("../controllers/productController");
 const multer = require("multer");
 const path = require("path");
@@ -24,5 +26,7 @@ const upload = multer({ storage: storage });
 router.post("/", upload.array("imageUrl", 10), createProduct);
 router.get("/", getProducts);
 router.get("/user/:email", getProductsByEmail);
+router.get("/:id", getProductById); // New route to get product by ID
+router.put("/:id", upload.array("imageUrl", 10), updateProduct);
 
 module.exports = router;
