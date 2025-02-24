@@ -46,7 +46,8 @@ const MyProducts = () => {
           >
             Create Product
           </Link>
-        </div>k
+        </div>
+        k
       </header>
       <main className="p-6">
         <div className="mb-4">
@@ -66,11 +67,11 @@ const MyProducts = () => {
               image={`http://localhost:6400/${product.imageUrl[0]}`}
               price={product.price}
             />
-          ))}kk
+          ))}
         </div>
       </main>
     </div>
-  );kk
+  );
 };
 
 export default MyProducts;
