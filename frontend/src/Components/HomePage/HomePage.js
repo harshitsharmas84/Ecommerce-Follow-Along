@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import ProductCard from "../ProductCard";
+import Navigation from "../Navigation"; // Import Navigation
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -35,29 +35,7 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow-md p-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">E-Commerce</h1>
-        <div>
-          <Link
-            to="/login"
-            className="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 mr-2"
-          >
-            Login
-          </Link>
-          <Link
-            to="/signup"
-            className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700"
-          >
-            Sign Up
-          </Link>
-          <Link
-            to="/create-product"
-            className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
-          >
-            Create Product
-          </Link>
-        </div>
-      </header>
+      <Navigation /> {/* Add Navigation component */}
       <main className="p-6">
         <div className="mb-4">
           <input

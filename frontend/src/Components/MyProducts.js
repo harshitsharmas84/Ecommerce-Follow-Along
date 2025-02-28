@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ProductCard from "./ProductCard";
+import Navigation from "./Navigation"; // Import Navigation
 
 const MyProducts = () => {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const { email } = useParams(); // Get the email parameter from the URL
+  const { email } = useParams();
 
   useEffect(() => {
     fetch(`http://localhost:6400/api/products/user/${email}`)
@@ -25,30 +26,7 @@ const MyProducts = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow-md p-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">My Products</h1>
-        <div>
-          <Link
-            to="/login"
-            className="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 mr-2"
-          >
-            Login
-          </Link>
-          <Link
-            to="/signup"
-            className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700"
-          >
-            Sign Up
-          </Link>
-          <Link
-            to="/create-product"
-            className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
-          >
-            Create Product
-          </Link>
-        </div>
-        k
-      </header>
+      <Navigation /> {/* Add Navigation component */}
       <main className="p-6">
         <div className="mb-4">
           <input
@@ -63,6 +41,7 @@ const MyProducts = () => {
           {filteredProducts.map((product) => (
             <ProductCard
               key={product._id}
+              id={product._id}
               name={product.name}
               image={`http://localhost:6400/${product.imageUrl[0]}`}
               price={product.price}
