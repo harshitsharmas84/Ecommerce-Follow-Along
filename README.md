@@ -362,3 +362,41 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+
+# 📝 Milestone 15: Creating Navigation Component
+
+In this milestone, the following objectives were achieved:
+
+- **Navigation Component:** Created a reusable Navigation component that provides links to all main pages of the application.
+- **Responsive Design:** Implemented a responsive design that adapts to different screen sizes, with a hamburger menu for mobile devices.
+- **Consistent Navigation:** Added the Navigation component to all main pages to ensure a consistent user experience throughout the application.
+- **Smooth Transitions:** Utilized React Router's Link component for smooth navigation between pages without full page reloads.
+
+### 📂 Folder Structure
+
+The project is organized as follows:
+
+- frontend: Contains the React application.
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+      - `Login/`: Contains the LoginPage component.
+      - `SignUp/`: Contains the SignUpPage component.
+      - `UserList/`: Contains the UserList component.
+      - `Navigation/`: Contains the Navigation component.
+      - `ProductCard.js`: Contains the ProductCard component.
+      - `HomePage.js`: Contains the HomePage component.
+      - `ProductForm.js`: Contains the ProductForm component.
+      - `EditProductForm.js`: Contains the EditProductForm component.
+      - `MyProducts.js`: Contains the MyProducts component.
+      - `Cart.js`: Contains the Cart component.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+- backend: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js and productController.js files.
+  - `models/`: Contains the userModel.js and productModel.js files.
+  - `routes/`: Contains the userRoutes.js and productRoutes.js files.
+  - `middlewares/`: Contains the errorHandler.js file.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.
