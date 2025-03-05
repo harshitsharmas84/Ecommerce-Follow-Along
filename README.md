@@ -400,3 +400,43 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+
+# 📝 Milestone 16: Creating Product Info Page and Cart Functionality
+
+In this milestone, the following objectives were achieved:
+
+- **Product Info Page:** Created a dedicated page to display detailed product information including images, description, price, and seller details.
+- **Quantity Selector:** Implemented a quantity selector that allows users to choose how many of a product they want to purchase.
+- **Add to Cart Functionality:** Added the ability to add products to the shopping cart with the selected quantity.
+- **Cart Management:** Enhanced the cart page to display added items, allow quantity adjustments, and calculate the total price.
+- **Local Storage:** Implemented cart storage using the browser's local storage to persist cart items between sessions.
+
+### 📂 Folder Structure
+
+The project is organized as follows:
+
+- frontend: Contains the React application.
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+      - `Login/`: Contains the LoginPage component.
+      - `SignUp/`: Contains the SignUpPage component.
+      - `UserList/`: Contains the UserList component.
+      - `Navigation/`: Contains the Navigation component.
+      - `ProductCard.js`: Contains the ProductCard component.
+      - `HomePage.js`: Contains the HomePage component.
+      - `ProductForm.js`: Contains the ProductForm component.
+      - `EditProductForm.js`: Contains the EditProductForm component.
+      - `MyProducts.js`: Contains the MyProducts component.
+      - `ProductInfo.js`: Contains the ProductInfo component.
+      - `Cart.js`: Contains the Cart component.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+- backend: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js and productController.js files.
+  - `models/`: Contains the userModel.js and productModel.js files.
+  - `routes/`: Contains the userRoutes.js and productRoutes.js files.
+  - `middlewares/`: Contains the errorHandler.js file.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.
