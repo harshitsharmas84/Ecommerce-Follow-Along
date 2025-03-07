@@ -478,3 +478,41 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+
+## 📝 Milestone 18: Creating Backend Endpoint for Cart Page
+
+In this milestone, the following objectives were achieved:
+
+- **Cart Endpoint:** Created an endpoint to fetch all products inside the user's cart using their email.
+- **Backend Logic:** Implemented the backend logic to handle requests from the cart page and retrieve the cart items.
+
+### 📂 Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application.
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+      - `Login/`: Contains the LoginPage component.
+      - `SignUp/`: Contains the SignUpPage component.
+      - `UserList/`: Contains the UserList component.
+      - `Navigation/`: Contains the Navigation component.
+      - `ProductCard.js`: Contains the ProductCard component.
+      - `HomePage.js`: Contains the HomePage component.
+      - `ProductForm.js`: Contains the ProductForm component.
+      - `EditProductForm.js`: Contains the EditProductForm component.
+      - `MyProducts.js`: Contains the MyProducts component.
+      - `ProductInfo.js`: Contains the ProductInfo component.
+      - `Cart.js`: Contains the Cart component.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js, productController.js, and cartController.js files.
+  - `models/`: Contains the userModel.js and productModel.js files.
+  - `routes/`: Contains the userRoutes.js, productRoutes.js, and cartRoutes.js files.
+  - `middlewares/`: Contains the errorHandler.js and authMiddleware.js files.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.
+
