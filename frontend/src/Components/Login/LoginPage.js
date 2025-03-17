@@ -31,6 +31,7 @@ const LoginPage = () => {
 
       const data = await response.json();
       console.log("Login successful:", data);
+      localStorage.setItem("userEmail", email);
     } catch (error) {
       console.error("Error during login:", error);
       setError(error.message || "Login failed. Please try again.");

@@ -1,24 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const cartController = require('../controllers/cartController');
-// const authMiddleware = require('../middlewares/authMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const { getCartItems } = require('../controllers/cartController');
 
 // All cart routes should be protected
 // router.use(authMiddleware);
 
-router.get("/", getCartItems);
+
+
+router.get("/:email", cartController.getCartItems);
 // Add product to cart
-router.post('/add', cartController.addToCart);
+router.put('/increase/:email/:productId', cartController.increaseQuantity);
 
 // Get cart items
-router.get('/', cartController.getCartItems);
+router.put('/decrease/:email/:productId', cartController.decreaseQuantity);
 
 // Update cart item quantity
-router.put('/update', cartController.updateCartItem);
+router.put('/decrease/:email/:productId', cartController.decreaseQuantity);
 
 // Remove product from cart
-router.delete('/remove/:productId', cartController.removeFromCart);
+router.delete('/remove/:email/:productId', cartController.removeFromCart);
 
 module.exports = router;

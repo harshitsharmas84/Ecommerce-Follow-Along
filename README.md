@@ -400,7 +400,7 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
-
+``
 # 📝 Milestone 16: Creating Product Info Page and Cart Functionality
 
 In this milestone, the following objectives were achieved:
@@ -452,7 +452,7 @@ In this milestone, the following objectives were achieved:
 ### 📂 Folder Structure
 
 The project is organized as follows:
-
+``
 - `frontend/`: Contains the React application.
   - `public/`: Static assets like HTML files.
   - `src/`: React components and related files.
@@ -489,7 +489,7 @@ In this milestone, the following objectives were achieved:
 ### 📂 Folder Structure
 
 The project is organized as follows:
-
+  
 - `frontend/`: Contains the React application.
   - `public/`: Static assets like HTML files.
   - `src/`: React components and related files.
@@ -516,3 +516,43 @@ The project is organized as follows:
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
 
+## 📝 Milestone 19: Implementing Order Management
+
+In this milestone, the following objectives were achieved:
+
+- **Order Model:** Created a Mongoose schema to define the structure of order data, including fields for user, products, total price, and order status.
+- **Order Endpoints:** Built endpoints to create, fetch, and update orders.
+- **Order Placement:** Implemented functionality to place an order from the cart, including calculating the total price and saving the order to the database.
+- **Order History:** Added a page to display the user's order history, showing details of past orders.
+- **Order Status Updates:** Enabled updating the status of an order (e.g., pending, shipped, delivered) from the admin panel.
+
+### 📂 Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application.
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+      - `Login/`: Contains the `LoginPage` component.
+      - `SignUp/`: Contains the `SignUpPage` component.
+      - `UserList/`: Contains the `UserList` component.
+      - `Navigation/`: Contains the `Navigation` component.
+      - `ProductCard.js`: Contains the `ProductCard` component.
+      - `HomePage.js`: Contains the `HomePage` component.
+      - `ProductForm.js`: Contains the `ProductForm` component.
+      - `EditProductForm.js`: Contains the `EditProductForm` component.
+      - `MyProducts.js`: Contains the `MyProducts` component.
+      - `ProductInfo.js`: Contains the `ProductInfo` component.
+      - `Cart.js`: Contains the `Cart` component.
+      - `OrderHistory.js`: Contains the `OrderHistory` component.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the `userController.js`, `productController.js`, and `orderController.js` files.
+  - `models/`: Contains the `userModel.js`, `productModel.js`, and `orderModel.js` files.
+  - `routes/`: Contains the `userRoutes.js`, `productRoutes.js`, and `orderRoutes.js` files.
+  - `middlewares/`: Contains the `errorHandler.js` and `authMiddleware.js` files.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.
