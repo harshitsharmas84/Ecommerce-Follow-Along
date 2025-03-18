@@ -556,3 +556,73 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+
+## 📝 Milestone 20: Profile Page
+
+In this milestone, the following objectives were achieved:
+
+- **Backend Endpoint:** Created an endpoint to fetch user data using their email.
+- **Profile Page:** Developed a frontend profile page to display user data including profile photo, name, email, and addresses.
+- **Address Management:** Displayed addresses and provided an option to add new addresses.
+
+### 📂 Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application.
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+      - `ProfilePage.js`: Contains the ProfilePage component.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js file.
+  - `models/`: Contains the userModel.js file.
+  - `routes/`: Contains the userRoutes.js file.
+  - `middlewares/`: Contains the authMiddleware.js file.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.
+
+# 📝 Milestone 21: Cart System Enhancement
+
+In this milestone, the following objectives were achieved:
+
+- **Cart Component:** Enhanced the Cart component to manage shopping cart functionality with proper state management.
+- **Quantity Management:** Implemented functions to increase, decrease, and remove items from the cart.
+- **Total Price Calculation:** Added automatic calculation of the total price based on item quantities and prices.
+- **Loading and Error States:** Integrated proper loading and error handling states in the cart interface.
+- **Address Integration:** Connected the address system with the cart for delivery information.
+
+### 📂 Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application.
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+      - `Login/`: Contains the LoginPage component.
+      - `SignUp/`: Contains the SignUpPage component.
+      - `UserList/`: Contains the UserList component.
+      - `Navigation/`: Contains the Navigation component.
+      - `ProductCard.js`: Contains the ProductCard component.
+      - `HomePage.js`: Contains the HomePage component.
+      - `ProductForm.js`: Contains the ProductForm component.
+      - `EditProductForm.js`: Contains the EditProductForm component.
+      - `MyProducts.js`: Contains the MyProducts component.
+      - `ProductInfo.js`: Contains the ProductInfo component.
+      - `Cart.js`: Contains the enhanced Cart component.
+      - `ProfilePage.js`: Contains the ProfilePage component.
+      - `AddressForm.js`: Contains the AddressForm component.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js, productController.js, and cartController.js files.
+  - `models/`: Contains the userModel.js, productModel.js files.
+  - `routes/`: Contains the userRoutes.js, productRoutes.js, and cartRoutes.js files.
+  - `middlewares/`: Contains the errorHandler.js and authMiddleware.js files.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.

@@ -2,6 +2,7 @@ const User = require("../models/userModel");
 const multer = require("multer");
 const path = require("path");
 const bcrypt = require("bcrypt");
+const asyncHandler = require("express-async-handler");
 
 // Set up Multer for file uploads
 const storage = multer.diskStorage({
@@ -72,4 +73,20 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, createUser, upload, loginUser };
+
+const getUserProfile = asyncHandler(async (req, res) => {
+
+  const user = await User.findOne({ email: req.params.email });
+  if (user) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+    });
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
+});
+
+
+module.exports = { getUsers, createUser, upload, loginUser, getUserProfile};

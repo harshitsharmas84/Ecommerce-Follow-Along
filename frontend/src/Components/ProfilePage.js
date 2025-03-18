@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import Navigation from "./Navigation";
-
+import { Link } from "react-router-dom";
 const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -73,9 +73,17 @@ const ProfilePage = () => {
                                     ))}
                                 </ul>
                             )}
-                            <button className="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
-                                Add Address
-                            </button>
+                            {/*<button className="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">*/}
+                            {/*    Add Address*/}
+                            {/*</button>*/}
+                            <div className="mt-4">
+                                <Link
+                                    to="/add-address"
+                                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                >
+                                    Add New Address
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 )}
