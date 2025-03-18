@@ -10,6 +10,7 @@ import MyProducts from "./Components/MyProducts";
 import EditProductForm from "./Components/EditProductForm";
 import Cart from "./Components/Cart";
 import ProductInfo from "./Components/ProductInfo"; // Import the new component
+import ProfilePage from "./Components/ProfilePage";
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
           <Route path="/user/:email" element={<MyProducts />} />
           <Route path="/edit-product/:id" element={<EditProductForm />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/product/:id" element={<ProductInfo />} />{" "}
+          <Route path="/product/:id" element={<ProductInfo />} />
+          <Route path="/profile" element={<ProfilePage />} />
           {/* Add new route */}
         </Routes>
       </div>

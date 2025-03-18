@@ -57,6 +57,12 @@ const Navigation = () => {
               >
                 Sign Up
               </Link>
+              <Link
+                  to="/profile"
+                  className="text-white hover:bg-indigo-500 px-3 py-2 rounded-md font-medium"
+              >
+                Profile
+              </Link>
             </div>
           </div>
 
