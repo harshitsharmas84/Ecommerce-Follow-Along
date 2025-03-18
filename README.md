@@ -626,3 +626,31 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+
+
+# 📝 Milestone 22: Address Storage Endpoint
+
+In this milestone, the following objectives were achieved:
+
+- **Backend Endpoint:** Created an endpoint to receive the address from the address form in the frontend.
+- **Address Storage:** Added the address to the address array inside the user collection in the database.
+
+### 📂 Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application.
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+      - `AddressForm.js`: Contains the AddressForm component.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the `userController.js` file.
+  - `models/`: Contains the `userModel.js` file.
+  - `routes/`: Contains the `userRoutes.js` file.
+  - `middlewares/`: Contains the `authMiddleware.js` file.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.

@@ -89,4 +89,34 @@ const getUserProfile = asyncHandler(async (req, res) => {
 });
 
 
-module.exports = { getUsers, createUser, upload, loginUser, getUserProfile};
+
+const addAddress = async (req, res) => {
+  try {
+    const { email } = req.params;
+    const { country, city, address1, address2, zipCode, addressType } = req.body;
+
+    // Format the address
+    const formattedAddress = `${addressType}: ${address1}, ${address2 ? address2 + ', ' : ''}${city}, ${country}, ${zipCode}`;
+
+    // Find the user and update their addresses
+    const user = await User.findOneAndUpdate(
+        { email },
+        { $push: { addresses: formattedAddress } },
+        { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({
+      message: 'Address added successfully',
+      addresses: user.addresses
+    });
+  } catch (error) {
+    console.error('Error adding address:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+module.exports = { getUsers, createUser, upload, loginUser, getUserProfile, addAddress};
