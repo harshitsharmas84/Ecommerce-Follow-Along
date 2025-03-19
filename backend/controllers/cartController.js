@@ -117,3 +117,44 @@ exports.removeFromCart = async (req, res) => {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
+
+exports.addToCart = async (req, res) => {
+    try {
+        const { email } = req.params;
+        const { productId, quantity } = req.body;
+
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const product = await Product.findById(productId);
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        // Check if product already exists in cart
+        const existingCartItem = user.cart.find(
+            (item) => item.productId.toString() === productId
+        );
+
+        if (existingCartItem) {
+            // Update quantity if product already in cart
+            existingCartItem.quantity += quantity;
+        } else {
+            // Add new product to cart
+            user.cart.push({
+                productId,
+                quantity,
+                price: product.price,
+                name: product.name,
+                image: product.imageUrl[0]
+            });
+        }
+
+        await user.save();
+        res.status(200).json({ message: 'Product added to cart' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};

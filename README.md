@@ -625,7 +625,7 @@ The project is organized as follows:
   - `middlewares/`: Contains the errorHandler.js and authMiddleware.js files.
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
-  - `package.json`: Manages backend dependencies.
+  - `package.json`: Manages backend dependencies
 
 
 # 📝 Milestone 22: Address Storage Endpoint
@@ -651,6 +651,49 @@ The project is organized as follows:
   - `models/`: Contains the `userModel.js` file.
   - `routes/`: Contains the `userRoutes.js` file.
   - `middlewares/`: Contains the `authMiddleware.js` file.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.
+
+
+# 📝 Milestone 23: Order Placement and Address Selection
+
+In this milestone, the following objectives were achieved:
+
+- **Place Order Button:** Added a "Place Order" button in the Cart component that navigates to the address selection page.
+- **Address Selection Page:** Created a page to display all saved addresses and allow the user to select one for delivery.
+- **Address Retrieval Endpoint:** Implemented a backend endpoint to fetch all addresses associated with a user.
+- **Order Schema:** Developed a MongoDB schema to store order information including products, quantities, address, and status.
+
+### 📂 Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application.
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+      - `Login/`: Contains the LoginPage component.
+      - `SignUp/`: Contains the SignUpPage component.
+      - `UserList/`: Contains the UserList component.
+      - `Navigation/`: Contains the Navigation component.
+      - `ProductCard.js`: Contains the ProductCard component.
+      - `HomePage.js`: Contains the HomePage component.
+      - `ProductForm.js`: Contains the ProductForm component.
+      - `EditProductForm.js`: Contains the EditProductForm component.
+      - `MyProducts.js`: Contains the MyProducts component.
+      - `ProductInfo.js`: Contains the ProductInfo component.
+      - `Cart.js`: Contains the Cart component with "Place Order" button.
+      - `ProfilePage.js`: Contains the ProfilePage component.
+      - `AddressForm.js`: Contains the AddressForm component.
+      - `SelectAddress.js`: Contains the new SelectAddress component.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js, productController.js, cartController.js files.
+  - `models/`: Contains the userModel.js, productModel.js, and orderModel.js files.
+  - `routes/`: Contains the userRoutes.js, productRoutes.js, and cartRoutes.js files.
+  - `middlewares/`: Contains the errorHandler.js and authMiddleware.js files.
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.

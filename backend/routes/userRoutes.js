@@ -5,7 +5,8 @@ const {
   upload,
   loginUser,
   getUserProfile,
-    addAddress
+    addAddress,
+    getUserAddresses
 } = require("../controllers/userController");
 const { authMiddleware } = require("../middlewares/authMiddleware");
 
@@ -13,7 +14,8 @@ const router = express.Router();
 
 router.get("/", getUsers);
 router.post("/", upload.single("profileImage"), createUser);
-router.post("/login", loginUser);
+router.post("/login/", loginUser);
 router.get('/profile/:email', getUserProfile)
-router.post("/addresses", addAddress);
+router.post("/address/:email",  addAddress);
+router.get("/addresses/:email",  getUserAddresses);
 module.exports = router;

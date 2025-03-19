@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  addresses: [String],
   cart: [{
     productId: {
       type: mongoose.Schema.Types.ObjectId,
