@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import axios from "axios";
 import Navigation from "./Navigation";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+    const navigate = useNavigate();
     const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -12,10 +14,17 @@ const Cart = () => {
     const userEmail = localStorage.getItem("userEmail");
 
 
+
     useEffect(() => {
             const fetchCartItems = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:6400/api/cart/${userEmail}`);
+                    const token = localStorage.getItem('token');
+                    const response = await axios.get(`http://localhost:6400/api/cart/${userEmail}`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                            }
+                        });
                     setCartItems(response.data);
                     calculateTotal(response.data);
                     setLoading(false);
@@ -38,9 +47,15 @@ const Cart = () => {
         setTotalPrice(total);
     }
 
+    const token = localStorage.getItem('token');
+
     const increaseQuantity = async (productId) => {
         try {
-            await axios.put(`http://localhost:6400/api/cart/increase/${userEmail}/${productId}`);
+            await axios.put(`http://localhost:6400/api/cart/increase/${userEmail}/${productId}`, {}, {
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                }
+            });
             const updatedCart = cartItems.map((item) => {
                 if (item._id === productId) {
                     return {...item, quantity: item.quantity + 1};
@@ -60,7 +75,11 @@ const Cart = () => {
             const item = cartItems.find((item) => item._id === productId);
             if (item.quantity <= 1) return;
 
-            await axios.put(`http://localhost:6400/api/cart/decrease/${userEmail}/${productId}`);
+            await axios.put(`http://localhost:6400/api/cart/decrease/${userEmail}/${productId}`, {}, {
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                }
+            });
             const updatedCart = cartItems.map(item => {
                 if (item._id === productId && item.quantity > 1) {
                     return {...item, quantity: item.quantity - 1};
@@ -77,7 +96,11 @@ const Cart = () => {
 
     const removeItem = async (productId) => {
         try {
-            await axios.delete(`http://localhost:6400/api/cart/${userEmail}/${productId}`);
+            await axios.delete(`http://localhost:6400/api/cart/remove/${userEmail}/${productId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
             const updatedCart = cartItems.filter((item) => item._id !== productId);
             setCartItems(updatedCart);
             calculateTotal(updatedCart);
@@ -85,6 +108,11 @@ const Cart = () => {
             setError("Failed to remove item");
         }
     };
+
+    const handlePlaceOrder = () => {
+        navigate('/select-address');
+    }
+    // Check if loading or error is true
 //
 if(loading) return <div>Loading....</div>
 if(error) return <div>{error}</div>
@@ -105,7 +133,9 @@ if(error) return <div>{error}</div>
                                 <div key={item._id} className="flex items-center justify-between border-b py-4">
                                     <div className="flex items-center">
                                         <img
-                                            src={`http://localhost:3001/${item.image.replace(/\\/g, '/')}`}
+                                            src={item.image
+                                                ? `http://localhost:3001/${item.image.replace(/\\/g, '/')}`
+                                                : "https://via.placeholder.com/100x100?text=No+Image"}
                                             alt={item.name}
                                             className="w-20 h-20 object-cover rounded mr-4"
                                         />
@@ -152,6 +182,14 @@ if(error) return <div>{error}</div>
                         </div>
                     </div>
                 )}
+            </div>
+            <div className="mt-6">
+                <button
+                    onClick={handlePlaceOrder}
+                    className=" bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700"
+                >
+                    Place Order
+                </button>
             </div>
         </div>
     );

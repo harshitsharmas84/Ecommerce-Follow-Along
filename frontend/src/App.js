@@ -12,6 +12,7 @@ import Cart from "./Components/Cart";
 import ProductInfo from "./Components/ProductInfo"; // Import the new component
 import ProfilePage from "./Components/ProfilePage";
 import AddressForm from "./Components/AddressForm";
+import SelectAddress from "./Components/SelectAddress";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/product/:id" element={<ProductInfo />} />
           <Route path="/profile" element={<ProfilePage />} />
             <Route path="/add-address" element={<AddressForm />} />
+          <Route path="/select-address" element={<SelectAddress />} />
           {/* Add new route */}
         </Routes>
       </div>
