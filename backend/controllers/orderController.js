@@ -53,3 +53,24 @@ exports.placeOrder = async (req, res) => {
         res.status(500).json({ message: "Error placing order", error: error.message });
     }
 };
+
+exports.getUserOrders = async (req, res) => {
+    try {
+        const { email } = req.params;
+
+        // Find all orders for the user with the given email
+        const orders = await Order.find({ "user.email": email });
+
+        if (!orders || orders.length === 0) {
+            return res.status(404).json({ message: "No orders found for this user" });
+        }
+
+        res.status(200).json({
+            success: true,
+            orders
+        });
+    } catch (error) {
+        console.error("Error fetching user orders:", error);
+        res.status(500).json({ message: "Error fetching orders", error: error.message });
+    }
+};

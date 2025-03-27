@@ -6,6 +6,6 @@ const { authMiddleware } = require("../middlewares/authMiddleware");
 
 // Add this new route
 router.post("/place-order",  orderController.placeOrder);
-
+router.get("/user-orders/:email", orderController.getUserOrders);
 
 module.exports = router;
