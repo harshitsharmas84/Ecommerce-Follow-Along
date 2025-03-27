@@ -51,7 +51,7 @@ const SelectAddress = () => {
         localStorage.setItem('deliveryAddress', selectedAddress);
 
         // Navigate to payment or order confirmation page
-        navigate('/payment');
+        navigate('/order-confirmation');
     };
 
     const handleAddNewAddress = () => {

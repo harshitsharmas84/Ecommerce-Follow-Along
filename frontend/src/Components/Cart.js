@@ -109,7 +109,13 @@ const Cart = () => {
         }
     };
 
+    // const handlePlaceOrder = () => {
+    //     navigate('/select-address');
+    // }
     const handlePlaceOrder = () => {
+        // Save cart items and total price to localStorage
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        localStorage.setItem('totalPrice', totalPrice.toString());
         navigate('/select-address');
     }
     // Check if loading or error is true
