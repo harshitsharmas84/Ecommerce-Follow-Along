@@ -38,7 +38,7 @@ const OrderConfirmation = () => {
         try {
             const token = localStorage.getItem('token');
             // Call the API to create an order
-            await axios.post('http://localhost:6400/api/orders', {
+            await axios.post('http://localhost:6400/api/orders/place-order', {
                 userEmail,
                 products: cartItems.map(item => ({
                     productId: item._id,

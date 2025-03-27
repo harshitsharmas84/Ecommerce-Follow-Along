@@ -744,3 +744,28 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+
+
+# 📝 Milestone 25: Order Placement Backend Endpoint
+
+In this milestone, the following objectives were achieved:
+
+- **Order Placement Endpoint:** Created a backend endpoint to process and store order information.
+- **User ID Retrieval:** Implemented functionality to retrieve the user ID from the provided email.
+- **Multi-Product Orders:** Set up the system to create individual order records for each product in the cart.
+- **Address Integration:** Connected the selected address details with the order information.
+- **Order Status Management:** Added initial order status tracking with "Pending" as the default state.
+
+### 📂 Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application with existing components.
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js, productController.js, cartController.js, and orderController.js files.
+    - Updated `orderController.js` with the new placeOrder function.
+  - `models/`: Contains the userModel.js, productModel.js, and orderModel.js files.
+  - `routes/`: Contains the userRoutes.js, productRoutes.js, cartRoutes.js, and orderRoutes.js files.
+    - Updated `orderRoutes.js` with the new place-order endpoint.
+  - `middlewares/`: Contains the errorHandler.js and authMiddleware.js files.
+  - `index.js`: Main server file with added order routes registration.
