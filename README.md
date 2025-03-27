@@ -697,3 +697,50 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
+
+
+
+## 📝 Milestone 24: Order Confirmation & Order Summary Page
+
+In this milestone, the following objectives were achieved:
+
+- **Order Creation Endpoint:** Developed a backend endpoint to create new orders with selected address, cart items, and pricing details.
+- **Order Confirmation Page:** Created a page to display order confirmation with a summary of the purchased items.
+- **Order Summary:** Implemented a detailed order summary showing product details, quantities, prices, and delivery address.
+- **Order Status Tracking:** Added functionality to track and display the current status of each order.
+- **Cart Clearing:** Implemented automatic cart clearing after successful order placement.
+
+### 📂 Folder Structure
+
+The project is organized as follows:
+
+- `frontend/`: Contains the React application.
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+      - `Login/`: Contains the LoginPage component.
+      - `SignUp/`: Contains the SignUpPage component.
+      - `UserList/`: Contains the UserList component.
+      - `Navigation/`: Contains the Navigation component.
+      - `ProductCard.js`: Contains the ProductCard component.
+      - `HomePage.js`: Contains the HomePage component.
+      - `ProductForm.js`: Contains the ProductForm component.
+      - `EditProductForm.js`: Contains the EditProductForm component.
+      - `MyProducts.js`: Contains the MyProducts component.
+      - `ProductInfo.js`: Contains the ProductInfo component.
+      - `Cart.js`: Contains the Cart component with "Place Order" button.
+      - `ProfilePage.js`: Contains the ProfilePage component.
+      - `AddressForm.js`: Contains the AddressForm component.
+      - `SelectAddress.js`: Contains the SelectAddress component.
+      - `OrderConfirmation.js`: Contains the OrderConfirmation component.
+      - `OrderSummary.js`: Contains the OrderSummary component.
+  - `package.json`: Manages frontend dependencies.
+  - `tailwind.config.js`: Configuration for Tailwind CSS.
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains the userController.js, productController.js, cartController.js, and orderController.js files.
+  - `models/`: Contains the userModel.js, productModel.js, and orderModel.js files.
+  - `routes/`: Contains the userRoutes.js, productRoutes.js, cartRoutes.js, and orderRoutes.js files.
+  - `middlewares/`: Contains the errorHandler.js and authMiddleware.js files.
+  - `uploads/`: Directory for storing uploaded files.
+  - `index.js`: Main server file handling API requests.
+  - `package.json`: Manages backend dependencies.
