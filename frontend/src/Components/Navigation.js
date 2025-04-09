@@ -57,10 +57,7 @@ const Navigation = () => {
               >
                 Sign Up
               </Link>
-              <Link
-                  to="/my-orders"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              >
+              <Link to="/my-orders" className="text-white hover:text-gray-300">
                 My Orders
               </Link>
               <Link

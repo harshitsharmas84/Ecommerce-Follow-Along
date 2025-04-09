@@ -8,4 +8,5 @@ const { authMiddleware } = require("../middlewares/authMiddleware");
 router.post("/place-order",  orderController.placeOrder);
 router.get("/user-orders/:email", orderController.getUserOrders);
 
+router.put('/cancel-order/:id', orderController.cancelOrder);
 module.exports = router;

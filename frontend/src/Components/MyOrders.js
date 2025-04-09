@@ -10,25 +10,34 @@ const MyOrders = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                const userEmail = localStorage.getItem('userEmail');
-                if (!userEmail) {
-                    throw new Error('User not logged in');
-                }
-
-                const response = await axios.get(`http://localhost:6400/api/orders/user-orders/${userEmail}`);
-                // Ensure we're setting an array to state
-                setOrders(Array.isArray(response.data) ? response.data : []);
-                setLoading(false);
-            } catch (error) {
-                setError(error.message);
-                setLoading(false);
-            }
-        };
-
         fetchOrders();
     }, []);
+
+    const fetchOrders = async () => {
+        try {
+            const userEmail = localStorage.getItem('userEmail');
+            if (!userEmail) {
+                throw new Error('User not logged in');
+            }
+
+            const response = await axios.get(`http://localhost:6400/api/orders/user-orders/${userEmail}`);
+            setOrders(response.data.orders || []);
+            setLoading(false);
+        } catch (error) {
+            setError(error.message || 'Failed to fetch orders');
+            setLoading(false);
+        }
+    };
+
+    const handleCancelOrder = async (orderId) => {
+        try {
+            await axios.put(`http://localhost:6400/api/orders/cancel-order/${orderId}`);
+            fetchOrders();
+        } catch (error) {
+            setError('Failed to cancel order');
+            console.error('Error cancelling order:', error);
+        }
+    };
 
     if (loading) return <div className="text-center mt-8">Loading orders...</div>;
     if (error) return <div className="text-center mt-8 text-red-500">Error: {error}</div>;
@@ -39,7 +48,7 @@ const MyOrders = () => {
             <div className="max-w-6xl mx-auto p-4">
                 <h1 className="text-2xl font-bold mb-6">My Orders</h1>
 
-                {!Array.isArray(orders) || orders.length === 0 ? (
+                {!orders || orders.length === 0 ? (
                     <div className="text-center py-8">
                         <p>You haven't placed any orders yet.</p>
                         <Link to="/" className="text-blue-600 hover:underline mt-2 inline-block">
@@ -71,7 +80,7 @@ const MyOrders = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                     <div>
                                         <p className="text-sm text-gray-600">Order Date:</p>
-                                        <p>{new Date(order.createdAt).toLocaleDateString()}</p>
+                                        <p>{new Date(order.orderDate || order.createdAt).toLocaleDateString()}</p>
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-600">Total Amount:</p>
@@ -82,34 +91,41 @@ const MyOrders = () => {
                                 <div className="border-t pt-4 mt-2">
                                     <p className="text-sm text-gray-600 mb-2">Items:</p>
                                     <div className="space-y-2">
-                                        {Array.isArray(order.products) && order.products.map((item) => (
-                                            <div key={item._id} className="flex items-center gap-2">
+                                        {order.product && (
+                                            <div className="flex items-center gap-2">
                                                 <img
-                                                    src={`http://localhost:6400/${item.image}`}
-                                                    alt={item.name}
+                                                    src={`http://localhost:6400/${order.product.image}`}
+                                                    alt={order.product.name}
                                                     className="w-12 h-12 object-cover rounded"
                                                 />
                                                 <div>
-                                                    <p className="font-medium">{item.name}</p>
+                                                    <p className="font-medium">{order.product.name}</p>
                                                     <p className="text-sm text-gray-600">
-                                                        {item.quantity} × ₹{item.price}
+                                                        {order.quantity} × ₹{order.price}
                                                     </p>
                                                 </div>
                                             </div>
-                                        ))}
+                                        )}
                                     </div>
                                 </div>
 
-                                <Link
-                                    to={`/order/${order._id}`}
-                                    className="mt-4 inline-block text-blue-600 hover:underline text-sm"
-                                >
-                                    View Order Details →
-                                </Link>cd frontend
-                                rm -rf node_modules
-                                rm package-lock.json
-                                npm cache clean --force
-                                npm install
+                                <div className="mt-4 flex justify-between items-center">
+                                    <Link
+                                        to={`/order/${order._id}`}
+                                        className="text-blue-600 hover:underline text-sm"
+                                    >
+                                        View Order Details →
+                                    </Link>
+
+                                    {order.status !== 'Cancelled' && order.status !== 'Delivered' && (
+                                        <button
+                                            onClick={() => handleCancelOrder(order._id)}
+                                            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+                                        >
+                                            Cancel Order
+                                        </button>
+                                    )}
+                                </div>
                             </div>
                         ))}
                     </div>
