@@ -14,6 +14,7 @@ import ProfilePage from "./Components/ProfilePage";
 import AddressForm from "./Components/AddressForm";
 import SelectAddress from "./Components/SelectAddress";
 import OrderConfirmation from "./Components/OrderConfirmation";
+import MyOrders from "./Components/MyOrders";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/add-address" element={<AddressForm />} />
           <Route path="/select-address" element={<SelectAddress />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
+          <Route path="/my-orders" element={<MyOrders />} />
           {/* Add new route */}
         </Routes>
       </div>
