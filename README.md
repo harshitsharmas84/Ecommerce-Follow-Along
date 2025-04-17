@@ -400,7 +400,8 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
-``
+    ``
+
 # 📝 Milestone 16: Creating Product Info Page and Cart Functionality
 
 In this milestone, the following objectives were achieved:
@@ -453,6 +454,7 @@ In this milestone, the following objectives were achieved:
 
 The project is organized as follows:
 ``
+
 - `frontend/`: Contains the React application.
   - `public/`: Static assets like HTML files.
   - `src/`: React components and related files.
@@ -489,7 +491,7 @@ In this milestone, the following objectives were achieved:
 ### 📂 Folder Structure
 
 The project is organized as follows:
-  
+
 - `frontend/`: Contains the React application.
   - `public/`: Static assets like HTML files.
   - `src/`: React components and related files.
@@ -627,7 +629,6 @@ The project is organized as follows:
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies
 
-
 # 📝 Milestone 22: Address Storage Endpoint
 
 In this milestone, the following objectives were achieved:
@@ -654,7 +655,6 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
-
 
 # 📝 Milestone 23: Order Placement and Address Selection
 
@@ -697,8 +697,6 @@ The project is organized as follows:
   - `uploads/`: Directory for storing uploaded files.
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
-
-
 
 ## 📝 Milestone 24: Order Confirmation & Order Summary Page
 
@@ -745,7 +743,6 @@ The project is organized as follows:
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
 
-
 # 📝 Milestone 25: Order Placement Backend Endpoint
 
 In this milestone, the following objectives were achieved:
@@ -769,8 +766,6 @@ The project is organized as follows:
     - Updated `orderRoutes.js` with the new place-order endpoint.
   - `middlewares/`: Contains the errorHandler.js and authMiddleware.js files.
   - `index.js`: Main server file with added order routes registration.
-
-
 
 ## 📝 Milestone 26: Order Information Page
 
@@ -820,7 +815,6 @@ The project is organized as follows:
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
 
-
 ## 📝 Milestone 27: My Orders Page
 
 In this milestone, the following objectives were achieved:
@@ -869,18 +863,17 @@ The project is organized as follows:
   - `index.js`: Main server file handling API requests.
   - `package.json`: Manages backend dependencies.
 
-
 ## 📝 Milestone 27: My Orders Page (Frontend)
 
 In this milestone, we focused on enhancing the user experience by providing a dedicated page where users can view their order history.
 
 **Objectives Achieved:**
 
--   **'My Orders' Page Creation:** Developed a new frontend component/page (`MyOrdersPage.js` or similar) specifically for displaying the logged-in user's orders.
--   **API Integration:** Implemented logic within the frontend page to send an authenticated GET request to the `/api/orders/my-orders` backend endpoint upon page load.
--   **User-Specific Data Fetching:** Ensured the request includes necessary authentication details (like a JWT token) so the backend can identify the user and return only *their* orders.
--   **Order History Display:** Rendered the fetched list of orders on the page, typically showing key information like Order ID, Date, Total Amount, and Status for each order.
--   **Navigation Enhancement:** Added a "My Orders" link to the main navigation bar (e.g., in the `Navigation.js` component) to allow users easy access to their order history page.
+- **'My Orders' Page Creation:** Developed a new frontend component/page (`MyOrdersPage.js` or similar) specifically for displaying the logged-in user's orders.
+- **API Integration:** Implemented logic within the frontend page to send an authenticated GET request to the `/api/orders/my-orders` backend endpoint upon page load.
+- **User-Specific Data Fetching:** Ensured the request includes necessary authentication details (like a JWT token) so the backend can identify the user and return only _their_ orders.
+- **Order History Display:** Rendered the fetched list of orders on the page, typically showing key information like Order ID, Date, Total Amount, and Status for each order.
+- **Navigation Enhancement:** Added a "My Orders" link to the main navigation bar (e.g., in the `Navigation.js` component) to allow users easy access to their order history page.
 
 This milestone allows users to conveniently track and review their past purchases within the application.
 
@@ -888,42 +881,41 @@ This milestone allows users to conveniently track and review their past purchase
 
 The project structure remains largely the same, with key additions/updates in the frontend for this milestone:
 
--   `frontend/`: Contains the React application.
-  -   `public/`: Static assets like HTML files.
-  -   `src/`: React components and related files.
-    -   `Components/`: Contains the React components.
-      -   `Login/`: Contains the LoginPage component.
-      -   `SignUp/`: Contains the SignUpPage component.
-      -   `UserList/`: Contains the UserList component.
-      -   `Navigation/`: Contains the **updated** Navigation component (added 'My Orders' link).
-      -   `ProductCard.js`: Contains the ProductCard component.
-      -   `HomePage.js`: Contains the HomePage component.
-      -   `ProductForm.js`: Contains the ProductForm component.
-      -   `EditProductForm.js`: Contains the EditProductForm component.
-      -   `MyProducts.js`: Contains the MyProducts component.
-      -   `ProductInfo.js`: Contains the ProductInfo component.
-      -   `Cart.js`: Contains the Cart component.
-      -   `ProfilePage.js`: Contains the ProfilePage component.
-      -   `AddressForm.js`: Contains the AddressForm component.
-      -   `SelectAddress.js`: Contains the SelectAddress component.
-      -   `OrderConfirmation.js`: Contains the OrderConfirmation component.
-      -   `OrderSummary.js`: Contains the OrderSummary component.
-      -   `OrderList.js`: Contains the OrderList component (Potentially reused or refactored from M26, might be for Admins).
-      -   `OrderDetail.js`: Contains the OrderDetail component.
-      -   `MyOrdersPage.js`: **(New)** Contains the component to display the current user's orders.
-    -   `App.js`: Main application component (Routes updated for MyOrdersPage).
-    -   `index.js`: Entry point for the React app.
-  -   `package.json`: Manages frontend dependencies.
-  -   `tailwind.config.js`: Configuration for Tailwind CSS.
--   `backend/`: Contains the Node.js server.
-  -   `controllers/`: Contains controllers (orderController.js handles `/my-orders`).
-  -   `models/`: Contains the userModel.js, productModel.js, and orderModel.js files.
-  -   `routes/`: Contains routes (orderRoutes.js includes the `/my-orders` endpoint).
-  -   `middlewares/`: Contains the errorHandler.js and authMiddleware.js files (authMiddleware used to protect `/my-orders`).
-  -   `uploads/`: Directory for storing uploaded files.
-  -   `index.js`: Main server file handling API requests.
-  -   `package.json`: Manages backend dependencies.
-
+- `frontend/`: Contains the React application.
+- `public/`: Static assets like HTML files.
+- `src/`: React components and related files.
+- `Components/`: Contains the React components.
+- `Login/`: Contains the LoginPage component.
+- `SignUp/`: Contains the SignUpPage component.
+- `UserList/`: Contains the UserList component.
+- `Navigation/`: Contains the **updated** Navigation component (added 'My Orders' link).
+- `ProductCard.js`: Contains the ProductCard component.
+- `HomePage.js`: Contains the HomePage component.
+- `ProductForm.js`: Contains the ProductForm component.
+- `EditProductForm.js`: Contains the EditProductForm component.
+- `MyProducts.js`: Contains the MyProducts component.
+- `ProductInfo.js`: Contains the ProductInfo component.
+- `Cart.js`: Contains the Cart component.
+- `ProfilePage.js`: Contains the ProfilePage component.
+- `AddressForm.js`: Contains the AddressForm component.
+- `SelectAddress.js`: Contains the SelectAddress component.
+- `OrderConfirmation.js`: Contains the OrderConfirmation component.
+- `OrderSummary.js`: Contains the OrderSummary component.
+- `OrderList.js`: Contains the OrderList component (Potentially reused or refactored from M26, might be for Admins).
+- `OrderDetail.js`: Contains the OrderDetail component.
+- `MyOrdersPage.js`: **(New)** Contains the component to display the current user's orders.
+- `App.js`: Main application component (Routes updated for MyOrdersPage).
+- `index.js`: Entry point for the React app.
+- `package.json`: Manages frontend dependencies.
+- `tailwind.config.js`: Configuration for Tailwind CSS.
+- `backend/`: Contains the Node.js server.
+- `controllers/`: Contains controllers (orderController.js handles `/my-orders`).
+- `models/`: Contains the userModel.js, productModel.js, and orderModel.js files.
+- `routes/`: Contains routes (orderRoutes.js includes the `/my-orders` endpoint).
+- `middlewares/`: Contains the errorHandler.js and authMiddleware.js files (authMiddleware used to protect `/my-orders`).
+- `uploads/`: Directory for storing uploaded files.
+- `index.js`: Main server file handling API requests.
+- `package.json`: Manages backend dependencies.
 
 ## 📝 Milestone 28: Order Cancellation Feature
 
@@ -940,6 +932,7 @@ In this milestone, the following objectives were achieved:
 The project is organized as follows:
 
 - `frontend/`: Contains the React application.
+
   - `src/`: React components and related files.
     - `Components/`: Contains the React components.
       - `MyOrders.js`: Updated with cancel order functionality.
@@ -947,3 +940,44 @@ The project is organized as follows:
 - `backend/`: Contains the Node.js server.
   - `controllers/`: Contains controllers including orderController.js with new cancelOrder function.
   - `routes/`: Contains routes including orderRoutes.js with new cancel-order endpoint.
+
+# 📝 Milestone 29: PayPal Payment Integration
+
+In this milestone, the following objectives were achieved:
+
+- **PayPal Developer Account:** Created a PayPal developer account to access the sandbox environment for testing payments.
+- **PayPal Client ID:** Retrieved the PayPal Client ID from the sandbox account for integration with the application.
+- **Payment Options:** Added payment method selection options in the order confirmation page with radio buttons for Cash on Delivery (COD) and PayPal payment.
+- **Conditional UI:** Implemented conditional rendering to show different UI elements based on the selected payment method.
+- **Backend Integration:** Updated the order placement endpoint to include the payment method in the order data.
+- **Payment Flow Preparation:** Set up the foundation for implementing PayPal buttons in the next milestone.
+
+### 📂 Folder Structure
+
+The project structure remains largely the same, with key updates in the frontend for this milestone:
+
+- `frontend/`: Contains the React application.
+
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+      - `OrderConfirmation.js`: Updated with payment method selection options (COD and PayPal) and conditional rendering based on payment method.
+
+- `backend/`: Contains the Node.js server.
+  - `controllers/`: Contains controllers including orderController.js.
+  - `routes/`: Contains routes including orderRoutes.js.
+
+### 💡 Implementation Details
+
+1. **Payment Method Selection:**
+
+   - Added radio buttons to select between Cash on Delivery (COD) and PayPal payment options
+   - Implemented state management to track the selected payment method
+
+2. **Conditional UI:**
+
+   - Displayed the "Place Order" button only when COD is selected
+   - Added a placeholder for PayPal buttons that will be implemented in the next milestone
+
+3. **Order Data Enhancement:**
+   - Updated the order creation payload to include the payment method information
+   - Prepared the order confirmation page for full PayPal integration

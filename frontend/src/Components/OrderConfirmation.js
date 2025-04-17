@@ -10,10 +10,13 @@ const OrderConfirmation = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState("cod"); // Default to COD
   const navigate = useNavigate();
 
   const userEmail = localStorage.getItem("userEmail");
   const token = localStorage.getItem("token");
+
+  const paypalClientId = "PAYPAL_CLIENT_ID_HERE";
 
   useEffect(() => {
     // Check if user is logged in
@@ -48,6 +51,10 @@ const OrderConfirmation = () => {
     setLoading(false);
   }, [token, userEmail, navigate]);
 
+  const handlePaymentMethodChange = (e) => {
+    setPaymentMethod(e.target.value);
+  };
+
   const handlePlaceOrder = async () => {
     if (isPlacingOrder) return; // Prevent double submission
 
@@ -67,6 +74,7 @@ const OrderConfirmation = () => {
           })),
           address: selectedAddress,
           totalAmount: totalPrice,
+          paymentMethod: paymentMethod, // Add payment method to order
         },
         {
           headers: {
@@ -168,13 +176,63 @@ const OrderConfirmation = () => {
             </div>
           </div>
 
-          <button
-            onClick={handlePlaceOrder}
-            disabled={isPlacingOrder}
-            className="mt-6 bg-green-600 text-white px-6 py-3 w-full rounded hover:bg-green-700 disabled:opacity-50 transition-colors"
-          >
-            {isPlacingOrder ? "Placing Order..." : "Place Order"}
-          </button>
+          {/* Payment Method Selection */}
+          <div className="mt-6">
+            <h2 className="text-xl font-semibold mb-3">Payment Method</h2>
+            <div className="space-y-3">
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="cod"
+                  name="paymentMethod"
+                  value="cod"
+                  checked={paymentMethod === "cod"}
+                  onChange={handlePaymentMethodChange}
+                  className="mr-2"
+                />
+                <label htmlFor="cod" className="text-gray-800">
+                  Cash on Delivery (COD)
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="paypal"
+                  name="paymentMethod"
+                  value="paypal"
+                  checked={paymentMethod === "paypal"}
+                  onChange={handlePaymentMethodChange}
+                  className="mr-2"
+                />
+                <label htmlFor="paypal" className="text-gray-800">
+                  Pay with PayPal
+                </label>
+              </div>
+            </div>
+          </div>
+
+          {/* PayPal Button Container - will be implemented in next milestone */}
+          {paymentMethod === "paypal" && (
+            <div className="mt-4 border rounded p-4 bg-gray-50">
+              <p className="text-center text-gray-600 mb-2">
+                PayPal payment buttons will appear here in the next milestone.
+              </p>
+              <div id="paypal-button-container" className="flex justify-center">
+                {/* PayPal buttons will be rendered here */}
+              </div>
+            </div>
+          )}
+
+          {/* Display COD button only if COD is selected */}
+          {paymentMethod === "cod" && (
+            <button
+              onClick={handlePlaceOrder}
+              disabled={isPlacingOrder}
+              className="mt-6 bg-green-600 text-white px-6 py-3 w-full rounded hover:bg-green-700 disabled:opacity-50 transition-colors"
+            >
+              {isPlacingOrder ? "Placing Order..." : "Place Order"}
+            </button>
+          )}
         </div>
       </div>
     </div>
