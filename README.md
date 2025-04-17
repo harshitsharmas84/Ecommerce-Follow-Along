@@ -978,3 +978,51 @@ The project structure remains largely the same, with key updates in the frontend
   - `controllers/`: Contains controllers including orderController.js.
   - `models/`: Contains the userModel.js, productModel.js, and orderModel.js files.
   - `routes/`: Contains routes including orderRoutes.js.
+
+# 📝 Milestone 31: Redux Global State Management
+
+In this milestone, the following objectives were achieved:
+
+- **Redux Integration:** Installed and set up the Redux library for global state management using `redux`, `react-redux`, and `@reduxjs/toolkit`.
+- **Store Configuration:** Created a centralized Redux store to manage application state, focusing on user email as the first global state.
+- **User Actions:** Implemented action creators in `userActions.js` for setting and clearing the user's email in the global state.
+- **Provider Setup:** Wrapped the main App component with Redux Provider to make the store accessible throughout the application.
+- **Reducer Implementation:** Created a user reducer to handle state changes based on dispatched actions.
+
+### 📂 Implementation Details
+
+1. **Redux Setup:**
+
+   - Installed the required packages: redux, react-redux, and @reduxjs/toolkit
+   - Created a new `store` directory in the src folder
+
+2. **Store Configuration:**
+
+   - Implemented the `store.js` file with configureStore from Redux Toolkit
+   - Set up a userReducer to handle user email state changes
+
+3. **Action Creators:**
+
+   - Created `userActions.js` with setEmail and clearEmail action creators
+   - Defined action types for setting and clearing user email
+
+4. **Application Integration:**
+   - Updated the main index.js file to wrap the App component with Redux Provider
+   - Made the Redux store accessible to all components in the application
+
+### 📂 Folder Structure
+
+The project structure has been enhanced with the addition of Redux files:
+
+- `frontend/`: Contains the React application.
+
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+    - `store/`: **(New)** Contains Redux related files.
+      - `store.js`: Configures the Redux store and reducers.
+      - `userActions.js`: Contains action creators for user state.
+  - `package.json`: Updated with Redux dependencies.
+  - `index.js`: Modified to include Redux Provider.
+
+- `backend/`: Contains the Node.js server (unchanged).
