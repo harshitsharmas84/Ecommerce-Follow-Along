@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@paypal/react-paypal-js": "^8.8.3",
     "axios": "^1.8.4",
     "cra-template": "1.2.0",
     "dotenv": "^16.4.7",

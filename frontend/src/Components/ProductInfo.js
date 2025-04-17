@@ -42,32 +42,6 @@ const ProductInfo = () => {
     }
   };
 
-  // const handleAddToCart = () => {
-  //   // Get existing cart from localStorage or initialize empty array
-  //   const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-  //
-  //   // Check if product already exists in cart
-  //   const existingProductIndex = existingCart.findIndex(
-  //     (item) => item.productId === id
-  //   );
-  //
-  //   if (existingProductIndex !== -1) {
-  //     // Update quantity if product already in cart
-  //     existingCart[existingProductIndex].quantity += quantity;
-  //   } else {
-  //     // Add new product to cart
-  //     existingCart.push({
-  //       productId: id,
-  //       name: product.name,
-  //       price: product.price,
-  //       image: product.imageUrl[0],
-  //       quantity: quantity,
-  //     });
-  //   }
-
-
-
-
   const handleAddToCart = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -76,24 +50,24 @@ const ProductInfo = () => {
       // If user is logged in, update server-side cart
       if (token && userEmail) {
         await axios.post(
-            `http://localhost:6400/api/cart/add/${userEmail}`,
-            {
-              productId: id,
-              quantity: quantity
+          `http://localhost:6400/api/cart/add/${userEmail}`,
+          {
+            productId: id,
+            quantity: quantity,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
             },
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
-              }
-            }
+          }
         );
       }
 
       // Always update local storage for offline access
       const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
       const existingProductIndex = existingCart.findIndex(
-          (item) => item.productId === id
+        (item) => item.productId === id
       );
 
       if (existingProductIndex !== -1) {
@@ -117,19 +91,6 @@ const ProductInfo = () => {
       alert("Failed to add product to cart. Please try again.");
     }
   };
-
-
-
-
-
-    // // Save updated cart to localStorage
-    // localStorage.setItem("cart", JSON.stringify(existingCart));
-
-    // Notify user
-    alert("Product added to cart!");
-
-    // Optional: Navigate to cart
-    // navigate("/cart");
 
   if (loading) {
     return (
@@ -259,6 +220,5 @@ const ProductInfo = () => {
     </div>
   );
 };
-
 
 export default ProductInfo;

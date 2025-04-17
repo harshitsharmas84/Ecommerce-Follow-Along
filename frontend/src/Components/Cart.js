@@ -1,204 +1,246 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import axios from "axios";
-import Navigation from "./Navigation";
 import { useNavigate } from "react-router-dom";
+import Navigation from "./Navigation";
 
 const Cart = () => {
-    const navigate = useNavigate();
-    const [cartItems, setCartItems] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [totalPrice, setTotalPrice] = useState(0);
+  const navigate = useNavigate();
+  const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0);
 
-    const userEmail = localStorage.getItem("userEmail");
+  const userEmail = localStorage.getItem("userEmail");
+  const token = localStorage.getItem("token");
 
-
-
-    useEffect(() => {
-            const fetchCartItems = async () => {
-                try {
-                    const token = localStorage.getItem('token');
-                    const response = await axios.get(`http://localhost:6400/api/cart/${userEmail}`,
-                        {
-                            headers: {
-                                Authorization: `Bearer ${token}`,
-                            }
-                        });
-                    setCartItems(response.data);
-                    calculateTotal(response.data);
-                    setLoading(false);
-                } catch (err) {
-                    setError("Failed to fetch cart items");
-                    setLoading(false);
-
-
-                }
-            }
-            fetchCartItems();
-        }, [userEmail] //when userEmail changes, useEffect will run again
-    );
-
-
-    const calculateTotal = (items) => {
-        const total = items.reduce((acc, item) => {
-            return acc + (item.price * item.quantity);
-        }, 0);
-        setTotalPrice(total);
-    }
-
-    const token = localStorage.getItem('token');
-
-    const increaseQuantity = async (productId) => {
-        try {
-            await axios.put(`http://localhost:6400/api/cart/increase/${userEmail}/${productId}`, {}, {
-                headers:{
-                    Authorization: `Bearer ${token}`,
-                }
-            });
-            const updatedCart = cartItems.map((item) => {
-                if (item._id === productId) {
-                    return {...item, quantity: item.quantity + 1};
-
-                }
-                return item;
-            });
-            setCartItems(updatedCart);
-            calculateTotal(updatedCart);
-        } catch (err) {
-            setError("Failed to increase Quantity")
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        if (!userEmail || !token) {
+          // Handle case when user is not logged in
+          const localCartItems = JSON.parse(localStorage.getItem("cart")) || [];
+          setCartItems(localCartItems);
+          calculateTotal(localCartItems);
+          setLoading(false);
+          return;
         }
-    }
 
-    const decreaseQuantity = async (productId) => {
-        try {
-            const item = cartItems.find((item) => item._id === productId);
-            if (item.quantity <= 1) return;
-
-            await axios.put(`http://localhost:6400/api/cart/decrease/${userEmail}/${productId}`, {}, {
-                headers:{
-                    Authorization: `Bearer ${token}`,
-                }
-            });
-            const updatedCart = cartItems.map(item => {
-                if (item._id === productId && item.quantity > 1) {
-                    return {...item, quantity: item.quantity - 1};
-                }
-                return item;
-            });
-            setCartItems(updatedCart);
-            calculateTotal(updatedCart);
-        } catch (error) {
-            setError("Failed to decrease Quantity")
-        }
-    }
-
-
-    const removeItem = async (productId) => {
-        try {
-            await axios.delete(`http://localhost:6400/api/cart/remove/${userEmail}/${productId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            });
-            const updatedCart = cartItems.filter((item) => item._id !== productId);
-            setCartItems(updatedCart);
-            calculateTotal(updatedCart);
-        } catch (err) {
-            setError("Failed to remove item");
-        }
+        const response = await axios.get(
+          `http://localhost:6400/api/cart/${userEmail}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setCartItems(response.data);
+        calculateTotal(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError("Failed to fetch cart items. Please try again.");
+        setLoading(false);
+      }
     };
 
-    // const handlePlaceOrder = () => {
-    //     navigate('/select-address');
-    // }
-    const handlePlaceOrder = () => {
-        // Save cart items and total price to localStorage
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-        localStorage.setItem('totalPrice', totalPrice.toString());
-        navigate('/select-address');
+    fetchCartItems();
+  }, [userEmail, token]);
+
+  const calculateTotal = (items) => {
+    const total = items.reduce((acc, item) => {
+      return acc + item.price * item.quantity;
+    }, 0);
+    setTotalPrice(total);
+  };
+
+  const increaseQuantity = async (productId) => {
+    try {
+      await axios.put(
+        `http://localhost:6400/api/cart/increase/${userEmail}/${productId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const updatedCart = cartItems.map((item) => {
+        if (item._id === productId) {
+          return { ...item, quantity: item.quantity + 1 };
+        }
+        return item;
+      });
+      setCartItems(updatedCart);
+      calculateTotal(updatedCart);
+    } catch (err) {
+      setError("Failed to increase quantity. Please try again.");
     }
-    // Check if loading or error is true
-//
-if(loading) return <div>Loading....</div>
-if(error) return <div>{error}</div>
+  };
 
+  const decreaseQuantity = async (productId) => {
+    try {
+      const item = cartItems.find((item) => item._id === productId);
+      if (item.quantity <= 1) return;
 
+      await axios.put(
+        `http://localhost:6400/api/cart/decrease/${userEmail}/${productId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const updatedCart = cartItems.map((item) => {
+        if (item._id === productId && item.quantity > 1) {
+          return { ...item, quantity: item.quantity - 1 };
+        }
+        return item;
+      });
+      setCartItems(updatedCart);
+      calculateTotal(updatedCart);
+    } catch (error) {
+      setError("Failed to decrease quantity. Please try again.");
+    }
+  };
+
+  const removeItem = async (productId) => {
+    try {
+      await axios.delete(
+        `http://localhost:6400/api/cart/remove/${userEmail}/${productId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const updatedCart = cartItems.filter((item) => item._id !== productId);
+      setCartItems(updatedCart);
+      calculateTotal(updatedCart);
+    } catch (err) {
+      setError("Failed to remove item. Please try again.");
+    }
+  };
+
+  const handlePlaceOrder = () => {
+    if (cartItems.length === 0) {
+      setError("Your cart is empty. Please add items to place an order.");
+      return;
+    }
+
+    // Save cart items and total price to localStorage
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    localStorage.setItem("totalPrice", totalPrice.toString());
+    navigate("/select-address");
+  };
+
+  if (loading) {
     return (
-        <div>
-            <Navigation/>
-            <div className="container mx-auto p-4">
-                <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
-
-                {cartItems.length === 0 ? (
-                    <p className="text-gray-500">Your cart is empty</p>
-                ) : (
-                    <div>
-                        <div className="bg-white rounded-lg shadow-lg p-6 mb-4">
-                            {cartItems.map((item) => (
-                                <div key={item._id} className="flex items-center justify-between border-b py-4">
-                                    <div className="flex items-center">
-                                        <img
-                                            src={item.image
-                                                ? `http://localhost:3001/${item.image.replace(/\\/g, '/')}`
-                                                : "https://via.placeholder.com/100x100?text=No+Image"}
-                                            alt={item.name}
-                                            className="w-20 h-20 object-cover rounded mr-4"
-                                        />
-                                        <div>
-                                            <h3 className="text-lg font-semibold">{item.name}</h3>
-                                            <p className="text-gray-600">${item.price}</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-center">
-                                        <div className="flex items-center border rounded">
-                                            <button
-                                                onClick={() => decreaseQuantity(item._id)}
-                                                className="px-3 py-1 bg-gray-200 hover:bg-gray-300"
-                                                disabled={item.quantity <= 1}
-                                            >
-                                                -
-                                            </button>
-                                            <span className="px-3 py-1">{item.quantity}</span>
-                                            <button
-                                                onClick={() => increaseQuantity(item._id)}
-                                                className="px-3 py-1 bg-gray-200 hover:bg-gray-300"
-                                            >
-                                                +
-                                            </button>
-                                        </div>
-
-                                        <button
-                                            onClick={() => removeItem(item._id)}
-                                            className="ml-4 text-red-500 hover:text-red-700"
-                                        >
-                                            Remove
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
-
-                            <div className="mt-6 text-right">
-                                <p className="text-xl font-bold">Total: ${totalPrice.toFixed(2)}</p>
-                                <button className="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
-                                    Checkout
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </div>
-            <div className="mt-6">
-                <button
-                    onClick={handlePlaceOrder}
-                    className=" bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700"
-                >
-                    Place Order
-                </button>
-            </div>
+      <div className="min-h-screen bg-gray-100">
+        <Navigation />
+        <div className="flex justify-center items-center h-[calc(100vh-4rem)]">
+          <div className="text-xl font-medium">Loading cart items...</div>
         </div>
+      </div>
     );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <Navigation />
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
+
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            {error}
+          </div>
+        )}
+
+        {cartItems.length === 0 ? (
+          <div className="bg-white rounded-lg shadow p-8 text-center">
+            <p className="text-lg text-gray-500 mb-4">Your cart is empty</p>
+            <button
+              onClick={() => navigate("/")}
+              className="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700"
+            >
+              Continue Shopping
+            </button>
+          </div>
+        ) : (
+          <div className="bg-white rounded-lg shadow p-6 mb-4">
+            <div className="divide-y">
+              {cartItems.map((item) => (
+                <div
+                  key={item._id}
+                  className="flex flex-col md:flex-row md:items-center md:justify-between py-4 gap-4"
+                >
+                  <div className="flex items-center">
+                    <img
+                      src={
+                        item.image
+                          ? `http://localhost:6400/${item.image}`
+                          : "https://via.placeholder.com/100x100?text=No+Image"
+                      }
+                      alt={item.name}
+                      className="w-20 h-20 object-cover rounded mr-4"
+                    />
+                    <div>
+                      <h3 className="text-lg font-semibold">{item.name}</h3>
+                      <p className="text-gray-600">${item.price}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between md:justify-end w-full md:w-auto">
+                    <div className="flex items-center border rounded">
+                      <button
+                        onClick={() => decreaseQuantity(item._id)}
+                        className="px-3 py-1 bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
+                        disabled={item.quantity <= 1}
+                      >
+                        -
+                      </button>
+                      <span className="px-4 py-1">{item.quantity}</span>
+                      <button
+                        onClick={() => increaseQuantity(item._id)}
+                        className="px-3 py-1 bg-gray-100 hover:bg-gray-200"
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    <button
+                      onClick={() => removeItem(item._id)}
+                      className="ml-4 text-red-500 hover:text-red-700"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 border-t pt-6">
+              <div className="flex justify-between items-center">
+                <span className="text-lg font-medium">Subtotal:</span>
+                <span className="text-xl font-bold">
+                  ${totalPrice.toFixed(2)}
+                </span>
+              </div>
+
+              <div className="mt-6 text-right">
+                <button
+                  onClick={handlePlaceOrder}
+                  className="bg-green-600 text-white px-8 py-3 rounded-md hover:bg-green-700 transition-colors"
+                >
+                  Proceed to Checkout
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Cart;

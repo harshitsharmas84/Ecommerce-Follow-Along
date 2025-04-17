@@ -1,11 +1,29 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is logged in
+    const token = localStorage.getItem("token");
+    const email = localStorage.getItem("userEmail");
+    setIsLoggedIn(!!token);
+    setUserEmail(email || "");
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userEmail");
+    setIsLoggedIn(false);
+    navigate("/login");
   };
 
   return (
@@ -26,47 +44,62 @@ const Navigation = () => {
             >
               Home
             </Link>
-            <Link
-              to="/my-products"
-              className="text-white hover:bg-indigo-500 px-3 py-2 rounded-md font-medium"
-            >
-              My Products
-            </Link>
-            <Link
-              to="/create-product"
-              className="text-white hover:bg-indigo-500 px-3 py-2 rounded-md font-medium"
-            >
-              Add Product
-            </Link>
-            <Link
-              to="/cart"
-              className="text-white hover:bg-indigo-500 px-3 py-2 rounded-md font-medium"
-            >
-              Cart
-            </Link>
-            <div className="ml-4 flex items-center md:ml-6">
-              <Link
-                to="/login"
-                className="text-white hover:bg-indigo-700 px-3 py-1 rounded border border-white"
-              >
-                Login
-              </Link>
-              <Link
-                to="/signup"
-                className="ml-2 text-indigo-600 bg-white hover:bg-gray-200 px-3 py-1 rounded"
-              >
-                Sign Up
-              </Link>
-              <Link to="/my-orders" className="text-white hover:text-gray-300">
-                My Orders
-              </Link>
-              <Link
+
+            {isLoggedIn ? (
+              <>
+                <Link
+                  to="/my-products"
+                  className="text-white hover:bg-indigo-500 px-3 py-2 rounded-md font-medium"
+                >
+                  My Products
+                </Link>
+                <Link
+                  to="/create-product"
+                  className="text-white hover:bg-indigo-500 px-3 py-2 rounded-md font-medium"
+                >
+                  Add Product
+                </Link>
+                <Link
+                  to="/cart"
+                  className="text-white hover:bg-indigo-500 px-3 py-2 rounded-md font-medium"
+                >
+                  Cart
+                </Link>
+                <Link
+                  to="/my-orders"
+                  className="text-white hover:bg-indigo-500 px-3 py-2 rounded-md font-medium"
+                >
+                  My Orders
+                </Link>
+                <Link
                   to="/profile"
                   className="text-white hover:bg-indigo-500 px-3 py-2 rounded-md font-medium"
-              >
-                Profile
-              </Link>
-            </div>
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="text-white hover:bg-indigo-700 px-3 py-1 rounded border border-white ml-4"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <div className="ml-4 flex items-center md:ml-6">
+                <Link
+                  to="/login"
+                  className="text-white hover:bg-indigo-700 px-3 py-1 rounded border border-white"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="ml-2 text-indigo-600 bg-white hover:bg-gray-200 px-3 py-1 rounded"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -124,43 +157,72 @@ const Navigation = () => {
           >
             Home
           </Link>
-          <Link
-            to="/my-products"
-            className="text-white hover:bg-indigo-500 block px-3 py-2 rounded-md font-medium"
-            onClick={toggleMenu}
-          >
-            My Products
-          </Link>
-          <Link
-            to="/create-product"
-            className="text-white hover:bg-indigo-500 block px-3 py-2 rounded-md font-medium"
-            onClick={toggleMenu}
-          >
-            Add Product
-          </Link>
-          <Link
-            to="/cart"
-            className="text-white hover:bg-indigo-500 block px-3 py-2 rounded-md font-medium"
-            onClick={toggleMenu}
-          >
-            Cart
-          </Link>
-          <div className="mt-3 space-y-1">
-            <Link
-              to="/login"
-              className="text-white hover:bg-indigo-500 block px-3 py-2 rounded-md font-medium"
-              onClick={toggleMenu}
-            >
-              Login
-            </Link>
-            <Link
-              to="/signup"
-              className="text-white hover:bg-indigo-500 block px-3 py-2 rounded-md font-medium"
-              onClick={toggleMenu}
-            >
-              Sign Up
-            </Link>
-          </div>
+
+          {isLoggedIn ? (
+            <>
+              <Link
+                to="/my-products"
+                className="text-white hover:bg-indigo-500 block px-3 py-2 rounded-md font-medium"
+                onClick={toggleMenu}
+              >
+                My Products
+              </Link>
+              <Link
+                to="/create-product"
+                className="text-white hover:bg-indigo-500 block px-3 py-2 rounded-md font-medium"
+                onClick={toggleMenu}
+              >
+                Add Product
+              </Link>
+              <Link
+                to="/cart"
+                className="text-white hover:bg-indigo-500 block px-3 py-2 rounded-md font-medium"
+                onClick={toggleMenu}
+              >
+                Cart
+              </Link>
+              <Link
+                to="/my-orders"
+                className="text-white hover:bg-indigo-500 block px-3 py-2 rounded-md font-medium"
+                onClick={toggleMenu}
+              >
+                My Orders
+              </Link>
+              <Link
+                to="/profile"
+                className="text-white hover:bg-indigo-500 block px-3 py-2 rounded-md font-medium"
+                onClick={toggleMenu}
+              >
+                Profile
+              </Link>
+              <button
+                onClick={() => {
+                  handleLogout();
+                  toggleMenu();
+                }}
+                className="text-white hover:bg-indigo-500 block px-3 py-2 rounded-md font-medium w-full text-left"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <div className="mt-3 space-y-1">
+              <Link
+                to="/login"
+                className="text-white hover:bg-indigo-500 block px-3 py-2 rounded-md font-medium"
+                onClick={toggleMenu}
+              >
+                Login
+              </Link>
+              <Link
+                to="/signup"
+                className="text-white hover:bg-indigo-500 block px-3 py-2 rounded-md font-medium"
+                onClick={toggleMenu}
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>
