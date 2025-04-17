@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navigation from "./Navigation";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const OrderConfirmation = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -16,7 +17,8 @@ const OrderConfirmation = () => {
   const userEmail = localStorage.getItem("userEmail");
   const token = localStorage.getItem("token");
 
-  const paypalClientId = "PAYPAL_CLIENT_ID_HERE";
+  // Replace with your actual PayPal client ID from your PayPal developer account
+  const paypalClientId = "YOUR_PAYPAL_CLIENT_ID";
 
   useEffect(() => {
     // Check if user is logged in
@@ -100,6 +102,67 @@ const OrderConfirmation = () => {
     } finally {
       setIsPlacingOrder(false);
     }
+  };
+
+  // Handler for when PayPal payment is approved
+  const handlePayPalApprove = async (data, actions) => {
+    try {
+      // Capture the funds from the transaction
+      const details = await actions.order.capture();
+      console.log("Payment completed successfully", details);
+
+      // Create order in your system
+      await axios.post(
+        "http://localhost:6400/api/orders/place-order",
+        {
+          userEmail,
+          products: cartItems.map((item) => ({
+            productId: item._id,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+          address: selectedAddress,
+          totalAmount: totalPrice,
+          paymentMethod: "paypal",
+          paymentId: details.id, // Store the PayPal transaction ID
+          paymentStatus: "completed",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Clear cart data
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("totalPrice");
+      localStorage.removeItem("deliveryAddress");
+
+      // Show success message and navigate to orders page
+      alert("Payment successful! Your order has been placed.");
+      navigate("/my-orders");
+    } catch (error) {
+      console.error("Error processing payment:", error);
+      setError(
+        "Payment was approved but we couldn't create your order. Please contact support."
+      );
+    }
+  };
+
+  // Create order for PayPal
+  const createOrder = (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            currency_code: "USD",
+            value: totalPrice.toFixed(2),
+          },
+          description: "Purchase from E-Commerce Store",
+        },
+      ],
+    });
   };
 
   if (loading) {
@@ -211,15 +274,25 @@ const OrderConfirmation = () => {
             </div>
           </div>
 
-          {/* PayPal Button Container - will be implemented in next milestone */}
+          {/* PayPal Button Container */}
           {paymentMethod === "paypal" && (
-            <div className="mt-4 border rounded p-4 bg-gray-50">
-              <p className="text-center text-gray-600 mb-2">
-                PayPal payment buttons will appear here in the next milestone.
+            <div className="mt-6 border rounded p-4 bg-gray-50">
+              <p className="text-center text-gray-600 mb-4">
+                Complete your purchase securely with PayPal
               </p>
-              <div id="paypal-button-container" className="flex justify-center">
-                {/* PayPal buttons will be rendered here */}
-              </div>
+              <PayPalScriptProvider
+                options={{
+                  "client-id": paypalClientId,
+                  components: "buttons",
+                  currency: "USD",
+                }}
+              >
+                <PayPalButtons
+                  style={{ layout: "vertical" }}
+                  createOrder={createOrder}
+                  onApprove={handlePayPalApprove}
+                />
+              </PayPalScriptProvider>
             </div>
           )}
 
