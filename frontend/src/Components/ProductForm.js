@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import Navigation from "./Navigation"; // Import Navigation
+import { useSelector } from "react-redux"; // Import useSelector
 
 const ProductForm = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [images, setImages] = useState([]);
-  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const userEmail = useSelector((state) => state.user.email); // Get email from Redux store
 
   const handleImageChange = (e) => {
     setImages([...e.target.files]);
@@ -17,8 +18,9 @@ const ProductForm = () => {
     e.preventDefault();
     setError("");
 
-    if (!name || !description || !price || !email || images.length === 0) {
-      setError("All fields are required");
+    if (!name || !description || !price || !userEmail || images.length === 0) {
+      // Check userEmail from store
+      setError("All fields are required, and you must be logged in.");
       return;
     }
 
@@ -26,7 +28,7 @@ const ProductForm = () => {
     formData.append("name", name);
     formData.append("description", description);
     formData.append("price", price);
-    formData.append("userEmail", email);
+    formData.append("userEmail", userEmail); // Use userEmail from store
     images.forEach((image) => {
       formData.append("imageUrl", image);
     });
@@ -49,7 +51,6 @@ const ProductForm = () => {
       setName("");
       setDescription("");
       setPrice("");
-      setEmail("");
       setImages([]);
     } catch (error) {
       console.error("Error during product creation:", error);
@@ -112,22 +113,6 @@ const ProductForm = () => {
               id="price"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               required
             />

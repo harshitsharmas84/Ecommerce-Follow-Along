@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navigation from "./Navigation";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useSelector } from "react-redux"; // Import useSelector
 
 const OrderConfirmation = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -14,8 +15,8 @@ const OrderConfirmation = () => {
   const [paymentMethod, setPaymentMethod] = useState("cod"); // Default to COD
   const navigate = useNavigate();
 
-  const userEmail = localStorage.getItem("userEmail");
   const token = localStorage.getItem("token");
+  const userEmail = useSelector((state) => state.user.email); // Get email from Redux store
 
   // Replace with your actual PayPal client ID from your PayPal developer account
   const paypalClientId = "YOUR_PAYPAL_CLIENT_ID";

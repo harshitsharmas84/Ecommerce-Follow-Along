@@ -1026,3 +1026,38 @@ The project structure has been enhanced with the addition of Redux files:
   - `index.js`: Modified to include Redux Provider.
 
 - `backend/`: Contains the Node.js server (unchanged).
+
+# 📝 Milestone 32: Integrating Redux for Global Email State
+
+In this milestone, the user's email state management was integrated across the application using Redux:
+
+- **Login Page Update:** Modified `LoginPage.js` to dispatch the `setEmail` action upon successful login, storing the user's email in the Redux store instead of `localStorage`.
+- **Global State Access:** Updated various components (`Navigation.js`, `Cart.js`, `MyOrders.js`, `AddressForm.js`, `SelectAddress.js`, `ProfilePage.js`, `ProductForm.js`, `OrderConfirmation.js`) to retrieve the user's email from the Redux store using the `useSelector` hook, removing reliance on `localStorage` for email.
+- **Logout Update:** Modified `Navigation.js` to dispatch the `clearEmail` action on logout, removing the email from the Redux store.
+- **Product Form Update:** Removed the email input field from `ProductForm.js` as the logged-in user's email is now obtained from the global Redux state.
+
+### ✅ Key Changes
+
+- Replaced `localStorage.getItem('userEmail')` with `useSelector(state => state.user.email)` in relevant components.
+- Used `useDispatch` in `LoginPage.js` to call `setEmailAction(email)`.
+- Used `useDispatch` in `Navigation.js` to call `clearEmail()` during logout.
+- Removed the local email state and input field from `ProductForm.js`.
+
+This ensures a consistent and centralized way to manage and access the user's email throughout the frontend application.
+
+### 📂 Folder Structure
+
+The project structure has been enhanced with the addition of Redux files:
+
+- `frontend/`: Contains the React application.
+
+  - `public/`: Static assets like HTML files.
+  - `src/`: React components and related files.
+    - `Components/`: Contains the React components.
+    - `store/`: **(New)** Contains Redux related files.
+      - `store.js`: Configures the Redux store and reducers.
+      - `userActions.js`: Contains action creators for user state.
+  - `package.json`: Updated with Redux dependencies.
+  - `index.js`: Modified to include Redux Provider.
+
+- `backend/`: Contains the Node.js server (unchanged).

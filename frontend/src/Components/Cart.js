@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navigation from "./Navigation";
+import { useSelector } from "react-redux";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -10,14 +11,13 @@ const Cart = () => {
   const [error, setError] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const userEmail = localStorage.getItem("userEmail");
+  const userEmail = useSelector((state) => state.user.email);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
         if (!userEmail || !token) {
-          // Handle case when user is not logged in
           const localCartItems = JSON.parse(localStorage.getItem("cart")) || [];
           setCartItems(localCartItems);
           calculateTotal(localCartItems);
@@ -127,7 +127,6 @@ const Cart = () => {
       return;
     }
 
-    // Save cart items and total price to localStorage
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     localStorage.setItem("totalPrice", totalPrice.toString());
     navigate("/select-address");
